@@ -143,7 +143,7 @@ abstract class BTLink implements IBlueCtrl {
 	}
 	
 	/**
-	 * 建立新的逻辑连接的过程
+	 * 建立新的逻辑连接的过程，被BTLink内部调用
 	 */
 	protected abstract void creatLink() throws IOException;
 	

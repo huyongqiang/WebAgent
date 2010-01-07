@@ -96,7 +96,7 @@ public class LogicConnect implements IBlue {
 			if (buff==null || point>=buff.length) {
 				while (datas.isEmpty()) {
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {}
 				}
 				buff = (byte[]) datas.first();
