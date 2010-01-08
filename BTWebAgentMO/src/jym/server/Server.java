@@ -116,7 +116,7 @@ public class Server implements IBlueListener {
 		 */
 		private void setRequestProperty(Hashtable map) throws IOException {
 			con.setRequestMethod(method);
-			Mainc.pl(con.getRequestProperty(""));
+			//Mainc.pl(con.getRequestProperty(""));
 			
 			Enumeration keys = map.keys();
 			while (keys.hasMoreElements()) {
@@ -254,7 +254,7 @@ public class Server implements IBlueListener {
 		}
 	}
 	
-	private HttpConnection creatHttpLink(String url) throws IOException {
+	protected HttpConnection creatHttpLink(String url) throws IOException {
 		HttpConnection httpconn = null;
 		
 		if (supportAgent) {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project BTWebAgentPC">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="F:/project/eclipse_workspace/btWebAgent/webagentpc.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="mainc"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="F:/project/eclipse_workspace/btWebAgent/BTWebAgentPC/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="F:/project/eclipse_workspace/btWebAgent/BTWebAgentPC/lib/bluecove-2.0.3.jar"/>
+            <fileset dir="F:/project/eclipse_workspace/btWebAgent/BTWebAgentMO/bin"/>
+        </jar>
+    </target>
+</project>

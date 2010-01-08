@@ -126,7 +126,7 @@ public class HttpAgentConnection implements HttpConnection {
 		return (String) request.get(key);
 	}
 	
-	// ---------------------------------------------以下方法调用后状态变为CONNECTED
+	// -----------------------------以下方法调用后状态变为CONNECTED
 	
 	public String getHeaderField(String key) throws IOException {
 		connecting();
@@ -286,7 +286,8 @@ public class HttpAgentConnection implements HttpConnection {
 		throw new IOException("当前行不以换行结尾");
 	}
 	
-	// ------------------------------------------------------------- 以下方法不被支持
+	// ------------------------------------------ 以下方法不被支持
+	
 	public DataOutputStream openDataOutputStream() throws IOException {
 		unsupport();
 		return null;
@@ -333,7 +334,7 @@ public class HttpAgentConnection implements HttpConnection {
 		return null;
 	}
 	
-	// ------------------------------------------------------------------- end
+	// --------------------------------------------------------- end
 	
 	public String getProtocol() {
 		return "http";

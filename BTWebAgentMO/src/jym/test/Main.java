@@ -1,6 +1,6 @@
-// CatfoOD 2009-10-3 œ¬ŒÁ12:56:12
+// CatfoOD 2010-1-8 …œŒÁ07:21:08
 
-package jym.mid;
+package jym.test;
 
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
@@ -11,10 +11,9 @@ import javax.microedition.lcdui.StringItem;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
 
-import jym.server.Server;
 import jym.server.VersionControl;
 
-public class Mainc extends MIDlet implements CommandListener {
+public class Main extends MIDlet implements CommandListener {
 	private static Form form;
 	
 	protected void destroyApp(boolean arg0) throws MIDletStateChangeException {
@@ -25,11 +24,11 @@ public class Mainc extends MIDlet implements CommandListener {
 
 	protected void startApp() throws MIDletStateChangeException {
 		form = set();
-		new Server();
+		new TestServer();
 	}
 	
 	private Form set() {
-		Form f = new Form("CatfoOD 2010");
+		Form f = new Form("≤‚ ‘");
 		f.append(new StringItem("JavaProject.", VersionControl.string()));
 		Display.getDisplay(this).setCurrent(f);
 		return f;

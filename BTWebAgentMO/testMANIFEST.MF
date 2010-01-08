@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+MIDlet-1: HttpAgent, , jym.test.Main
+MIDlet-Name: HttpAgent
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Permissions: javax.microedition.io.Connector.file.read,javax.microedition.io.Connector.file.write,javax.microedition.io.Connector.http,javax.microedition.io.Connector.sms,javax.wireless.messaging.sms.send,javax.microedition.io.Connector.serversocket,javax.microedition.io.Connector.socket,javax.microedition.media.control.RecordControl,javax.microedition.media.control.VideoControl.getSnapshot
+MIDlet-Vendor: CatfoOD
+MIDlet-Version: 1.0

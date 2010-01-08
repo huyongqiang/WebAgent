@@ -68,15 +68,15 @@ public class SystemIcon {
 	private void setTip() {
 		Thread t = new Thread() {
 			public void run() {
-				while (true) {
+			while (true) {
 				ticon.setToolTip( "服务器监听端口:8080"
 						+ "\n下载流量:" + unitTran(downsize) 
 						+ "\n上传流量:" + unitTran(upsize) );
-				try {
-					sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+					try {
+						sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		};
@@ -84,18 +84,24 @@ public class SystemIcon {
 		t.start();
 	}
 	
-	private String unitTran(int i) {
-		String s = null;
+	private String unitTran(float i) {
+		String unit = null;
+		
 		if (i<1024) {
-			s = i + "Byte";
+			unit = "Byte";
 		}
 		else if (i<1048576) {
-			s = i/1024 + "KB";
+			i = i/1024;
+			unit = "KB";
 		}
 		else {
-			s = i/1048576 + "MB";
+			i = i/1048576;
+			unit = "MB";
 		}
-		return s;
+		i *= 100f;
+		i = (int)i / 100f;
+		
+		return i + unit;
 	}
 	
 	private final String title =
