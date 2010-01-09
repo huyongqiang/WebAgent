@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class LogicConnect implements IBlue {
+	/** 输入流阻塞循环的响应时间 */
+	public static final int WAIT_TIME = 200;
+	
 	private int id;
 	private BTLink physics;
 	
@@ -93,10 +96,10 @@ public class LogicConnect implements IBlue {
 		}
 		
 		private void getNextData() {
-			if (buff==null || point>=buff.length) {
+			if ( buff==null || point>=buff.length ) {
 				while (datas.isEmpty()) {
 					try {
-						Thread.sleep(100);
+						Thread.sleep(WAIT_TIME);
 					} catch (InterruptedException e) {}
 				}
 				buff = (byte[]) datas.first();

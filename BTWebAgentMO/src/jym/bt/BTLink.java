@@ -12,10 +12,10 @@ import java.util.Hashtable;
  * 蓝牙连接协议实现框架
  */
 abstract class BTLink implements IBlueCtrl {
+	
 	private IBlue blue;
 	protected DataInputStream in;
-	/** 对写出流必须同步*/
-	protected DataOutputStream out;
+	private OutStreamCreater outcreater;
 	private IBlueListener listener;
 	private Hashtable logics;
 	private boolean runing;
@@ -24,7 +24,7 @@ abstract class BTLink implements IBlueCtrl {
 		blue = b;
 		blue.start();
 		in = blue.getDataInputStream();
-		out = blue.getDataOutputStream();
+		outcreater = new OutStreamCreater(blue.getOutputStream());
 		logics = new Hashtable();
 		runing = false;
 	}
@@ -50,6 +50,13 @@ abstract class BTLink implements IBlueCtrl {
 	
 	public void registerBlueListener(IBlueListener listener) {
 		this.listener = listener;
+	}
+	
+	/**
+	 * 返回蓝牙物理连接数据输出流，输出流的操作是线程安全的
+	 */
+	protected DataOutputStream getOutStream() {
+		return outcreater.openDataOutputStream();
 	}
 	
 	private int pretreatment() throws IOException {
@@ -90,18 +97,17 @@ abstract class BTLink implements IBlueCtrl {
 
 	/**
 	 * 物理连接接收逻辑连接发送来的数据
-	 * @param id - 逻辑连接ID
+	 * @param log - 逻辑连接
 	 * @param data - 数据
 	 * @throws IOException 
 	 */
 	protected void recvData(LogicConnect log, byte[] data) throws IOException {
-	synchronized (out) {
+		DataOutputStream out = getOutStream();
 		out.writeInt(DATA);
 		out.writeInt(log.getID());
 		out.writeInt(data.length);
 		out.write(data);
 		out.flush();
-		}
 	}
 	
 	/**
@@ -134,11 +140,10 @@ abstract class BTLink implements IBlueCtrl {
 	protected void closeLogic(int id) throws IOException {
 		Integer logid = new Integer(id);
 		if (logics.remove(logid)!=null) {
-		synchronized (out) {
+			DataOutputStream out = getOutStream();
 			out.writeInt(CLOSE);
 			out.writeInt(id);
 			out.flush();
-			}
 		}
 	}
 	
@@ -180,6 +185,7 @@ abstract class BTLink implements IBlueCtrl {
 			logics.clear();
 			
 			try {
+				DataOutputStream out = getOutStream();
 				out.writeInt(EXIT);
 				out.flush();
 			} catch (IOException e) {}

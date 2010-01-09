@@ -14,8 +14,17 @@ import java.util.Map;
 import trayicon.SystemIcon;
 
 public class RequestPack {
+	
+	/** 
+	 * 输出缓冲的大小，严重影响速度
+	 * [缓冲]	[速度]
+	 * 256		10K
+	 * 2048		20K
+	 * 20480	30K
+	 * 32768	40K
+	 **/
+	public final int BUFF_LENGTH = 2048 * 16;
 	private final byte[] line = "\r\n".getBytes();
-	public final int BUFF_LENGTH = 2048;
 	
 	private Socket sk;
 	private OutputStream out;

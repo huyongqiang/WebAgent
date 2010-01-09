@@ -12,6 +12,10 @@ import jym.bt.IBlueCtrl;
 import jym.bt.IBlueListener;
 
 public class Processor implements IBlueListener {
+	
+	public final static int BLUE_CONN_WAIT = 800;
+	public final static int PROCESS_QUEUE_WAIT = 100;
+	
 	private RequestQueue queue;
 	private boolean stop = false;
 	private IBlueCtrl bluectrl;
@@ -32,7 +36,7 @@ public class Processor implements IBlueListener {
 		public void run() {
 			while (!stop) {
 				while (bluectrl==null) {
-					Tools.sleep(800);
+					Tools.sleep(BLUE_CONN_WAIT);
 				}
 				RequestPack req = queue.get();
 				if (req!=null) {
@@ -43,7 +47,7 @@ public class Processor implements IBlueListener {
 						e.printStackTrace();
 					}
 				} else {
-					Tools.sleep(800);
+					Tools.sleep(PROCESS_QUEUE_WAIT);
 				}
 			}
 		}
@@ -101,7 +105,7 @@ public class Processor implements IBlueListener {
 					bluectrl.close();
 				bluectrl = null;
 			}
-			Tools.sleep(800);
+			Tools.sleep(BLUE_CONN_WAIT);
 		}
 		
 		}}.start();

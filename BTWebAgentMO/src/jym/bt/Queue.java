@@ -50,9 +50,9 @@ public class Queue {
 	}
 	
 	public boolean isEmpty() {
-		synchronized (this) {
+	//	synchronized (this) {
 			return first==null;
-		}
+	//	}
 	}
 	
 	private class Node {

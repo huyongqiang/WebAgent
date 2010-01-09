@@ -2,6 +2,7 @@
 
 package jym.bt;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class BTLinkClient extends BTLink {	
@@ -18,10 +19,9 @@ public class BTLinkClient extends BTLink {
 	 * @throws IOException - 如果蓝牙没有连接
 	 */
 	public void newLink() throws IOException {
-	synchronized (out) {
+		DataOutputStream out = getOutStream();
 		out.writeInt(CREAT);
 		out.flush();
-		}
 	}
 	
 	protected void creatLink() throws IOException {

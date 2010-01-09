@@ -15,7 +15,8 @@ import jym.server.Server;
 import jym.server.VersionControl;
 
 public class Mainc extends MIDlet implements CommandListener {
-	private static Form form;
+	
+	private static Form form = null;
 	
 	protected void destroyApp(boolean arg0) throws MIDletStateChangeException {
 	}
@@ -24,15 +25,21 @@ public class Mainc extends MIDlet implements CommandListener {
 	}
 
 	protected void startApp() throws MIDletStateChangeException {
-		form = set();
+		getForm();
+		startService();
+	}
+	
+	protected void startService() {
 		new Server();
 	}
 	
-	private Form set() {
-		Form f = new Form("CatfoOD 2010");
-		f.append(new StringItem("JavaProject.", VersionControl.string()));
-		Display.getDisplay(this).setCurrent(f);
-		return f;
+	private Form getForm() {
+		if (form==null) {
+			form = new Form("CatfoOD 2010");
+			form.append(new StringItem("JavaProject.", VersionControl.string()));
+			Display.getDisplay(this).setCurrent(form);
+		}
+		return form;
 	}
 
 	public void commandAction(Command arg0, Displayable arg1) {
