@@ -10,10 +10,12 @@ public class BTLinkService extends BTLink {
 	
 	/**
 	 * 建立一个蓝牙连接协议，连接成功后返回
+	 * 
+	 * @param uuid - 蓝牙服务唯一ID
 	 * @throws IOException - 连接出错抛出异常
 	 */
-	public BTLinkService() throws IOException {
-		super(new BlueSevice());
+	public BTLinkService(String uuid) throws IOException {
+		super(new BlueSevice(uuid));
 	}
 
 	protected void creatLink() throws IOException {

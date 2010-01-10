@@ -7,6 +7,7 @@ import jym.mid.Mainc;
 public class Main extends Mainc {
 	
 	protected void startService() {
+		pl("[¿∂—¿ÀŸ∂»≤‚ ‘]");
 		new TestServer();
 	}
 	

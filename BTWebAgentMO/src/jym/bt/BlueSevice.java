@@ -15,8 +15,8 @@ import javax.microedition.io.StreamConnectionNotifier;
 
 
 public class BlueSevice implements IBlue {
-	private static final String uuid = "c81add9efee14d55860057d8f02f506a";
-	private static final String url = "btspp://localhost:"+uuid;
+	
+	private final String url;
 	private LocalDevice localdevice;
 	private StreamConnection con;
 	private StreamConnectionNotifier notifier;
@@ -24,9 +24,13 @@ public class BlueSevice implements IBlue {
 	
 	/**
 	 * 蓝牙服务器，被动连接(本地)
+	 * 
+	 * @param uuid - 蓝牙服务唯一ID
 	 * @throws IOException 
 	 */
-	public BlueSevice() throws IOException {
+	public BlueSevice(String uuid) throws IOException {
+		url = "btspp://localhost:"+uuid.toString();
+		
 		localdevice = LocalDevice.getLocalDevice();
 		localdevice.setDiscoverable(DiscoveryAgent.GIAC);
 	}

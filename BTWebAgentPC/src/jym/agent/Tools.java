@@ -2,6 +2,7 @@
 
 package jym.agent;
 
+import trayicon.Log;
 import trayicon.SystemIcon;
 
 public class Tools {
@@ -19,6 +20,7 @@ public class Tools {
 	public static void p(Object o) {
 		System.out.print(o);
 		SystemIcon.pl(o);
+		Log.p(o);
 	}
 	
 	public static void exit() {

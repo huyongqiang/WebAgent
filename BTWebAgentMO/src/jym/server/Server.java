@@ -42,7 +42,7 @@ public class Server implements IBlueListener {
 	public void waitLink() throws IOException {
 		while (!stop) {
 			Mainc.pl("[启动蓝牙监听]");
-			IBlueCtrl blue = new BTLinkService();
+			IBlueCtrl blue = new BTLinkService(UUID.id);
 			blue.registerBlueListener(this);
 			Mainc.pl("[蓝牙物理连接已建立]");
 			blue.start();

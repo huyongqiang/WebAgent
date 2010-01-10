@@ -85,7 +85,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 
 		g.drawString(s1, 500-l1, 205);
 		g.drawString(s2, 500-l2, 225);
-		g.drawString("Copyright CatfoOD 2009 QQ:412475540", 25, 290);
+		g.drawString("Copyright CatfoOD 2010 QQ:412475540", 25, 290);
 		g.drawString(name+" "+VersionControl.version, 25,310);
 		g.drawString("", 25, 330);
 		g.drawLine(0, 340, 550, 340);

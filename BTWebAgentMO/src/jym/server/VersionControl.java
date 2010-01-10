@@ -4,7 +4,7 @@ package jym.server;
 
 public final class VersionControl {
 	public static String programname = "Http proxy";
-	public static String version = "v0.33";
+	public static String version = "v0.34";
 	
 	public static String string() {
 		return programname +" "+ version;

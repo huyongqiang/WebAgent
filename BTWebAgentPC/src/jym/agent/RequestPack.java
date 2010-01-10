@@ -15,6 +15,8 @@ import trayicon.SystemIcon;
 
 public class RequestPack {
 	
+	private static int count = 0;
+	
 	/** 
 	 * 输出缓冲的大小，严重影响速度
 	 * [缓冲]	[速度]
@@ -26,6 +28,7 @@ public class RequestPack {
 	public final int BUFF_LENGTH = 2048 * 16;
 	private final byte[] line = "\r\n".getBytes();
 	
+	private String id;
 	private Socket sk;
 	private OutputStream out;
 	private InputStream in;
@@ -40,6 +43,15 @@ public class RequestPack {
 		in  = sk.getInputStream();
 		out = sk.getOutputStream();
 		read();
+		setid();
+	}
+	
+	private void setid() {
+		int i;
+	synchronized (RequestPack.class) {
+		i = count++;
+		}
+		id = String.format("(%1$04d)", i);
 	}
 	
 	public boolean isClosed() {
@@ -170,13 +182,6 @@ public class RequestPack {
 	}
 	
 	public String toString() {
-		if (display==null) {
-			int c = Math.abs(uri.hashCode());
-			String s = Integer.toHexString(c);
-			display = "("+ s +")";
-		}
-		return display;
+		return id;
 	}
-	
-	private String display = null;
 }

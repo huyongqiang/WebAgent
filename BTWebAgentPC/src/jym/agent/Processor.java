@@ -10,6 +10,7 @@ import jym.bt.BTLinkClient;
 import jym.bt.IBlue;
 import jym.bt.IBlueCtrl;
 import jym.bt.IBlueListener;
+import jym.server.UUID;
 
 public class Processor implements IBlueListener {
 	
@@ -92,8 +93,8 @@ public class Processor implements IBlueListener {
 		while (!stop) {
 			Tools.pl("+建立蓝牙连接");
 			try {
-				bluectrl = new BTLinkClient();
-				Tools.pl(".连接已建立");
+				bluectrl = new BTLinkClient(UUID.id);
+				Tools.pl(".连接已建立,可以访问网络");
 				bluectrl.registerBlueListener(Processor.this);
 				bluectrl.start();
 				Tools.pl(".蓝牙连接断开");

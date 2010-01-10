@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 
+import trayicon.Log;
 import trayicon.SystemIcon;
 
 import jym.agent.Server;
@@ -31,5 +32,6 @@ public class mainc {
 
 	private static void pl(String s) {
 		System.out.println(s);
+		Log.pl(s);
 	}
 }

@@ -12,6 +12,8 @@ import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import jym.agent.Tools;
 import jym.server.VersionControl;
@@ -58,11 +60,23 @@ public class SystemIcon {
 		ticon = new TrayIcon(getImage());
 		ticon.setPopupMenu(getPopupMenu());
 		ticon.setImageAutoSize(true);
+		click();
 		setTip();
 		try {
 			SystemTray.getSystemTray().add(ticon);
 		} catch (AWTException e) {
 		}
+	}
+	
+	private void click() {
+		ticon.addMouseListener( new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton()==MouseEvent.BUTTON1) {
+					Log.display();
+				}
+			}
+		});
 	}
 	
 	private void setTip() {
@@ -113,13 +127,14 @@ public class SystemIcon {
 	
 	private PopupMenu getPopupMenu() {
 		PopupMenu pm = new PopupMenu();
-		pm.add(getExitMenu());
+		pm.add(getLogMenu());
 		pm.add(getAboutMenu());
+		pm.add(getExitMenu());
 		return pm;
 	}
 	
 	private MenuItem getExitMenu() {
-		MenuItem mi = new MenuItem("Exit");
+		MenuItem mi = new MenuItem("退出");
 		mi.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -131,11 +146,22 @@ public class SystemIcon {
 	}
 	
 	private MenuItem getAboutMenu() {
-		MenuItem mi = new MenuItem("About");
+		MenuItem mi = new MenuItem("关于");
 		mi.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new AboutDialog(null);
+			}
+		});
+		return mi;
+	}
+	
+	private MenuItem getLogMenu() {
+		MenuItem mi = new MenuItem("日志");
+		mi.addActionListener( new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Log.display();
 			}
 		});
 		return mi;

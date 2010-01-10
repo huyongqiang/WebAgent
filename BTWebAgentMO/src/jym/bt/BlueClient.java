@@ -20,8 +20,8 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 
 public class BlueClient implements IBlue {
-	private static final String uuid = "c81add9efee14d55860057d8f02f506a";
-	private static final UUID[] uids = new UUID[] {new UUID(uuid, false)};
+
+	private final UUID[] uids;
 	
 	private DiscoveryAgent agent;
 	private DiscoveryListenerImpl listener;
@@ -33,9 +33,12 @@ public class BlueClient implements IBlue {
 	
 	/**
 	 * 蓝牙服务器，主动连接(本地)
+	 * 
+	 * @param uuid - 蓝牙服务唯一ID
 	 * @throws IOException
 	 */
-	public BlueClient() throws IOException {
+	public BlueClient(String uuid) throws IOException {
+		uids = new UUID[] {new UUID(uuid.toString(), false)};
 		local = LocalDevice.getLocalDevice();
 		agent = local.getDiscoveryAgent();
 	}
