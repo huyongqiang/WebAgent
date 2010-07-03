@@ -177,7 +177,7 @@ public class RequestPack {
 	private String getMethod() {
 		if (method==null || method.startsWith("CONNECT")) {
 			method = "GET";
-		}		
+		}
 		return method;
 	}
 	

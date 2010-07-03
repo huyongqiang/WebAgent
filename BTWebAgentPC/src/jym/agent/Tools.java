@@ -23,6 +23,10 @@ public class Tools {
 		Log.p(o);
 	}
 	
+	public static void debug(Object o) {
+		pl(":"+o);
+	}
+	
 	public static void exit() {
 		System.exit(0);
 	}

@@ -16,6 +16,7 @@ public class Processor implements IBlueListener {
 	
 	public final static int BLUE_CONN_WAIT = 800;
 	public final static int PROCESS_QUEUE_WAIT = 100;
+	public final static int MAX_PROCESS_COUNT = 10;
 	
 	private RequestQueue queue;
 	private boolean stop = false;
@@ -39,17 +40,19 @@ public class Processor implements IBlueListener {
 				while (bluectrl==null) {
 					Tools.sleep(BLUE_CONN_WAIT);
 				}
-				RequestPack req = queue.get();
-				if (req!=null) {
-					processqueue.put(req);
-					try {
-						bluectrl.newLink();
-					} catch (IOException e) {
-						e.printStackTrace();
+				if ( processqueue.getQueueSize()<MAX_PROCESS_COUNT ) {
+					RequestPack req = queue.get();
+					if (req!=null) {
+						processqueue.put(req);
+						try {
+							bluectrl.newLink();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						continue; // not sleep;
 					}
-				} else {
-					Tools.sleep(PROCESS_QUEUE_WAIT);
 				}
+				Tools.sleep(PROCESS_QUEUE_WAIT);
 			}
 		}
 	};

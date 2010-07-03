@@ -47,6 +47,7 @@ public class SystemIcon {
 			case '>':
 			case '<':
 			case '=':
+			case ':':
 				break;
 			default:
 				si.pop(o.toString());
